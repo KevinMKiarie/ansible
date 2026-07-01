@@ -1,0 +1,6 @@
+env: development
+app_port: 8080
+nginx_worker_processes: 1
+app_version: "latest"
+db_name: "app_dev"
+db_user: "dev_user"

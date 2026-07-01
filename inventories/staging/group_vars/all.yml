@@ -1,0 +1,6 @@
+env: staging
+app_port: 8080
+nginx_worker_processes: 2
+app_version: "latest"
+db_name: "app_staging"
+db_user: "staging_user"

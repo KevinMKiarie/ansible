@@ -1,0 +1,6 @@
+env: production
+app_port: 80
+nginx_worker_processes: 4
+app_version: "1.0.0"
+db_name: "app_prod"
+db_user: "prod_user"
