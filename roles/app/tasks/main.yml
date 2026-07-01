@@ -1,0 +1,15 @@
+- name: Ensure app directory exists
+  file:
+    path: /opt/app
+    state: directory
+    owner: ubuntu
+    group: ubuntu
+    mode: "0755"
+
+- name: Deploy index.html
+  template:
+    src: index.html.j2
+    dest: /opt/app/index.html
+    owner: ubuntu
+    group: ubuntu
+    mode: "0644"
