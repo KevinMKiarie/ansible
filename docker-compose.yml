@@ -1,36 +1,48 @@
 services:
   dev-web:
-    build: ./docker
+    build:
+      context: ./docker
+      network: host
     container_name: dev-web-01
     ports:
       - "2201:22"
 
   dev-db:
-    build: ./docker
+    build:
+      context: ./docker
+      network: host
     container_name: dev-db-01
     ports:
       - "2202:22"
 
   staging-web:
-    build: ./docker
+    build:
+      context: ./docker
+      network: host
     container_name: staging-web-01
     ports:
       - "2211:22"
 
   staging-db:
-    build: ./docker
+    build:
+      context: ./docker
+      network: host
     container_name: staging-db-01
     ports:
       - "2212:22"
 
   prod-web:
-    build: ./docker
+    build:
+      context: ./docker
+      network: host
     container_name: prod-web-01
     ports:
       - "2221:22"
 
   prod-db:
-    build: ./docker
+    build:
+      context: ./docker
+      network: host
     container_name: prod-db-01
     ports:
       - "2223:22"

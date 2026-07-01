@@ -1,30 +1,29 @@
-FROM ubuntu:22.04
+ FROM debian:bookworm-slim
+                                                                                                                                                                                                                                                             
+  ENV DEBIAN_FRONTEND=noninteractive      
+                                                                                                                                                                                                                                                             
+  RUN echo 'Acquire::ForceIPv4 "true";' > /etc/apt/apt.conf.d/99force-ipv4 && \                                                                                                                                                                              
+      echo 'Acquire::https::Verify-Peer "false";' >> /etc/apt/apt.conf.d/99force-ipv4
+                                                                                                                                                                                                                                                             
+  RUN sed -i 's|http://deb.debian.org|https://deb.debian.org|g' /etc/apt/sources.list.d/debian.sources
 
-ENV DEBIAN_FRONTEND=noninteractive
-
-RUN apt-get update && apt-get install -y \
-    openssh-server \
-    python3 \
-    python3-apt \
-    sudo \
-    && rm -rf /var/lib/apt/lists/*
-
-RUN useradd -m -s /bin/bash ubuntu && \                                                                                                                                                                                                                    
+  RUN apt-get update && apt-get install -y \                                                                                                                                                                                                                 
+      openssh-server \                    
+      python3 \                                                                                                                                                                                                                                              
+      sudo \                                                                                                                                                                                                                                                 
+      && rm -rf /var/lib/apt/lists/*
+                                                                                                                                                                                                                                                             
+  RUN useradd -m -s /bin/bash ubuntu && \     
       echo "ubuntu ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
 
-RUN mkdir -p /home/ubuntu/.ssh /run/sshd
-
-COPY authorized_keys /home/ubuntu/.ssh/authorized_keys 
-
-RUN chown -R ubuntu:ubuntu /home/ubuntu/.ssh && \                                                                                                                                                                                                          
-      chmod 700 /home/ubuntu/.ssh && \
+  RUN mkdir -p /home/ubuntu/.ssh /run/sshd                                                                                                                                                                                                                   
+                                          
+  COPY authorized_keys /home/ubuntu/.ssh/authorized_keys                                                                                                                                                                                                     
+                                                                                                                                                                                                                                                             
+  RUN chown -R ubuntu:ubuntu /home/ubuntu/.ssh && \
+      chmod 700 /home/ubuntu/.ssh && \                                                                                                                                                                                                                       
       chmod 600 /home/ubuntu/.ssh/authorized_keys
+                                                                                                                                                                                                                                                             
+  EXPOSE 22                               
 
-EXPOSE 22
-
-CMD ["/usr/sbin/sshd", "-D"]
-
-
-
-
-     
+  CMD ["/usr/sbin/sshd", "-D"]
