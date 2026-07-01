@@ -1,0 +1,12 @@
+- name: Apply common configuration to all servers
+  hosts: all
+  become: true
+  roles:
+    - common
+
+- name: Configure web servers
+  hosts: webservers
+  become: true
+  roles:
+    - webserver
+    - app
