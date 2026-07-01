@@ -6,6 +6,7 @@ services:
     container_name: dev-web-01
     ports:
       - "2201:22"
+      - "8080:8080"
 
   dev-db:
     build:
@@ -22,6 +23,7 @@ services:
     container_name: staging-web-01
     ports:
       - "2211:22"
+      - "8081:8080"
 
   staging-db:
     build:
@@ -38,6 +40,7 @@ services:
     container_name: prod-web-01
     ports:
       - "2221:22"
+      - "8082:80"
 
   prod-db:
     build:
